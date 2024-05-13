@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "producs")
+@Table(name = "products")
 // @Table(schema = "products")
 public class Products {
 
