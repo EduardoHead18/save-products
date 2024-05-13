@@ -1,6 +1,6 @@
 # Aplication with spring boot
 
-- Documentation:
+- Documentation: http://localhost:8080/swagger-ui/index.html#/
 
 ## Run App
 1. Install java 17
