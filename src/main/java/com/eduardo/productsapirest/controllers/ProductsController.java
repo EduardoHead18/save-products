@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-;
-
 @RestController
 @RequestMapping("/v1/products")
 public class ProductsController {
@@ -57,7 +55,10 @@ public class ProductsController {
         try {
             Products productUpdate = getProduct(id);
             if (productUpdate != null) {
-                productsRepository.save(product);
+                productUpdate.setName(product.getName());
+                productUpdate.setPrice(product.getPrice());
+                productsRepository.save(productUpdate);
+                System.out.println(productUpdate.getName());
                 return "The product was updated successfully.";
             }
             return "The product was updated successfully.";
