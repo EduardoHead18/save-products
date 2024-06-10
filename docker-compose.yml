@@ -12,3 +12,20 @@ services:
       POSTGRES_DB: ${SPRING_DATASOURCE_DB}
     ports:
       - "5431:5432"
+  app-backend:
+    container_name: app-backend
+    ports:
+      - 8080:8080
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db_postgres
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://db_postgres:5432/${SPRING_DATASOURCE_DB}
+        SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+        SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+        SPRING_DATASOURCE_DB: ${SPRING_DATASOURCE_DB}
+    
+    
+    
