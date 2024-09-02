@@ -3,6 +3,7 @@ package com.eduardo.productsapirest.controllers;
 
 import java.util.List;
 
+import com.eduardo.productsapirest.services.Implementation.ProductsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,63 +22,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/v1/products")
 public class ProductsController {
     @Autowired
-    private ProductsRepository productsRepository;
+
+
+    private ProductsImpl productsImplementation;
 
     @GetMapping("/")
     public List<Products> getAllProducts() {
-        try {
-            List<Products> responseAllProducts = productsRepository.findAll();
-            return responseAllProducts;
-        } catch (Exception e) {
-            throw new RuntimeException("Error when obtaining the products ", e);
-        }
+      return  productsImplementation.getAllProducts();
     }
 
     @GetMapping("/{id}")
     public Products getProduct(@PathVariable Long id) {
-        Products product = productsRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("This id is'n  exist"));
-        return product;
+      return productsImplementation.getProduct(id);
     }
-
+//cok
     @PostMapping("/create")
-    public String createProduct(@RequestBody Products newProduct) {
-        try {
-            productsRepository.save(newProduct);
-            return "The product was created successfully.";
-        } catch (Exception e) {
-            throw new RuntimeException("Error craeting a new product", e);
-        }
+    public void  createProduct(@RequestBody Products newProduct) {
+        productsImplementation.createProduct(newProduct);
     }
 
     @PutMapping("update/{id}")
-    public String updateProduct(@PathVariable Long id, @RequestBody Products product) {
-        try {
-            Products productUpdate = getProduct(id);
-            if (productUpdate != null) {
-                productUpdate.setName(product.getName());
-                productUpdate.setPrice(product.getPrice());
-                productsRepository.save(productUpdate);
-                System.out.println(productUpdate.getName());
-                return "The product was updated successfully.";
-            }
-            return "The product was updated successfully.";
-        } catch (Exception e) {
-            throw new RuntimeException("Error updating the product", e);
-        }
+    public void updateProduct(@PathVariable Long id, @RequestBody Products product) {
+         productsImplementation.updateProduct(id, product);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        try {
-            if (getProduct(id) != null) {
-                productsRepository.deleteById(id);
-                return "The product was deleted successfully.";
-            }
-            return "";
-        } catch (Exception e) {
-            throw new RuntimeException("Error deleting product " + e);
-        }
+    public void deleteProduct(@PathVariable Long id) {
+        productsImplementation.deleteProduct(id);
     }
 
 }
