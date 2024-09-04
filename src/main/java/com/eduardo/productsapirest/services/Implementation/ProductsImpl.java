@@ -5,9 +5,11 @@ import com.eduardo.productsapirest.exception.RequestException;
 import com.eduardo.productsapirest.repository.ProductsRepository;
 import com.eduardo.productsapirest.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ProductsImpl implements ProductsService {
     @Autowired
     ProductsRepository productsRepository;
