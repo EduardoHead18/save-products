@@ -1,10 +1,11 @@
 package com.eduardo.productsapirest.services.Implementation;
 
 import com.eduardo.productsapirest.entities.Products;
-import com.eduardo.productsapirest.exception.RequestException;
 import com.eduardo.productsapirest.repository.ProductsRepository;
 import com.eduardo.productsapirest.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,30 +16,31 @@ public class ProductsImpl implements ProductsService {
     ProductsRepository productsRepository;
 
     @Override
-    public List<Products> getAllProducts() {
+    public ResponseEntity<List<Products>> getAllProducts() {
         try {
             List<Products> responseAllProducts = productsRepository.findAll();
-            return responseAllProducts;
+            return ResponseEntity.ok(responseAllProducts);
         } catch (Exception e) {
-            throw new RequestException("400","Algo salio mal");
+//            throw new RequestException("400","Algo salio mal");
+            return null;
         }
     }
 
     @Override
     public Products getProduct(Long id) {
-        Products product = productsRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("This id is'n  exist"));
-        return product;
+        try{
+            Products product = productsRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("This id is'n  exist"));
+            return product;
+        } catch (Exception e){
+             return null;
+        }
     }
 
     @Override
-    public void createProduct(Products products) {
-        try {
-            productsRepository.save(products);
-        } catch (Exception e) {
-            throw new RuntimeException("Error craeting a new product", e);
-        }
-
+    public ResponseEntity<Products> createProduct( Products products) {
+        Products savedProduct = productsRepository.save(products);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 
     @Override
@@ -58,14 +60,17 @@ public class ProductsImpl implements ProductsService {
     }
 
     @Override
-    public void deleteProduct(Long id) {
+    public ResponseEntity<String> deleteProduct(Long id) {
         try {
             if (getProduct(id) != null) {
                 productsRepository.deleteById(id);
+                return ResponseEntity.status(HttpStatus.OK).body("Product with id " + id + " deleted");
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error deleting product " + e);
+//            throw new RuntimeException("Error deleting product " + e);
+             return ResponseEntity.status(HttpStatus.FOUND).body("Error deleting the product, possibly the id does not exist ");
         }
+         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error deleting the product, possibly the id does not exist");
     }
 
 }

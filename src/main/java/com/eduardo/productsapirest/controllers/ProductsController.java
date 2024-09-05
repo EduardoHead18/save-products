@@ -4,30 +4,25 @@ package com.eduardo.productsapirest.controllers;
 import java.util.List;
 
 import com.eduardo.productsapirest.services.Implementation.ProductsImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 // import com.eduardo.productsapirest.repository.ProductsRepository;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import com.eduardo.productsapirest.entities.Products;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/v1/products")
 public class ProductsController {
     @Autowired
-
-
     private ProductsImpl productsImplementation;
 
     @GetMapping("/")
-    public List<Products> getAllProducts() {
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Products>> getAllProducts() {
       return  productsImplementation.getAllProducts();
     }
 
@@ -35,10 +30,10 @@ public class ProductsController {
     public Products getProduct(@PathVariable Long id) {
       return productsImplementation.getProduct(id);
     }
-//cok
+
     @PostMapping("/create")
-    public void  createProduct(@RequestBody Products newProduct) {
-        productsImplementation.createProduct(newProduct);
+    public ResponseEntity<Products> createProduct(@Valid  @RequestBody Products newProduct) {
+       return  productsImplementation.createProduct(newProduct);
     }
 
     @PutMapping("update/{id}")
@@ -47,8 +42,8 @@ public class ProductsController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteProduct(@PathVariable Long id) {
-        productsImplementation.deleteProduct(id);
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        return productsImplementation.deleteProduct(id);
     }
 
 }
