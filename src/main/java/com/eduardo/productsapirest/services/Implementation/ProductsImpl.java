@@ -29,8 +29,7 @@ public class ProductsImpl implements ProductsService {
     @Override
     public Products getProduct(Long id) {
         try{
-            Products product = productsRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("This id is'n  exist"));
+            Products product = productsRepository.findById(id).get();
             return product;
         } catch (Exception e){
              return null;
