@@ -32,7 +32,7 @@ public class ProductsController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Products> createProduct(@Valid  @RequestBody Products newProduct) {
+    public ResponseEntity<Products> createProduct(@Valid @RequestBody Products newProduct) {
        return  productsImplementation.createProduct(newProduct);
     }
 

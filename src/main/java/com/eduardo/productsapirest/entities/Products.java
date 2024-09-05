@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 @Entity 
@@ -23,10 +24,11 @@ public class Products {
     private Long id;
 
     @Column(length = 50)
+    @Pattern(regexp = "^[A-Za-z0-9 ]+$", message = "Name can only contain letters, numbers, and spaces")
     @NotBlank(message ="required name field")
     private String name;
 
     @Column(length = 50)
     @NotNull(message="required price field")
-    private double price;
+    private Double price;
 }
