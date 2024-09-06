@@ -2,6 +2,7 @@
 package com.eduardo.productsapirest.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.eduardo.productsapirest.services.Implementation.ProductsImpl;
 import jakarta.validation.Valid;
@@ -27,7 +28,7 @@ public class ProductsController {
     }
 
     @GetMapping("/{id}")
-    public Products getProduct(@PathVariable Long id) {
+    public Optional<Products> getProduct(@PathVariable Long id) throws Exception {
       return productsImplementation.getProduct(id);
     }
 

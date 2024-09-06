@@ -9,6 +9,6 @@ public class ProductsApirestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProductsApirestApplication.class, args);
 		//test develop branch
-		System.out.println("Server start");
+		System.out.println("Server start 🚀");
 	}
 }

@@ -1,6 +1,7 @@
 package com.eduardo.productsapirest.services.Implementation;
 
 import com.eduardo.productsapirest.entities.Products;
+import com.eduardo.productsapirest.exceptions.ProductsExceptions;
 import com.eduardo.productsapirest.repository.ProductsRepository;
 import com.eduardo.productsapirest.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductsImpl implements ProductsService {
@@ -27,13 +29,16 @@ public class ProductsImpl implements ProductsService {
     }
 
     @Override
-    public Products getProduct(Long id) {
-        try{
-            Products product = productsRepository.findById(id).get();
-            return product;
-        } catch (Exception e){
-             return null;
+
+    public Optional<Products> getProduct(Long id) throws ProductsExceptions {
+
+        Optional<Products>  products = productsRepository.findById(id);
+        if (id == null || id == 0) {
+            throw new ProductsExceptions("400", HttpStatus.NOT_FOUND );
         }
+        if(products.isEmpty()) throw new ProductsExceptions("The product doesn't exist", HttpStatus.NOT_FOUND);
+
+        return productsRepository.findById(id);
     }
 
     @Override
@@ -45,8 +50,8 @@ public class ProductsImpl implements ProductsService {
     @Override
     public void updateProduct(Long id, Products products) {
         try {
-            Products productUpdate = getProduct(id);
-            if (productUpdate != null) {
+            Optional<Products> productUpdate = getProduct(id);
+            if (productUpdate.isPresent()) {
 //                productUpdate.setName(product.getName());
 //                productUpdate.setPrice(product.getPrice());
 //                productsRepository.save(productUpdate);
