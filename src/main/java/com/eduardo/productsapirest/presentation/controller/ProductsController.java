@@ -1,5 +1,5 @@
 
-package com.eduardo.productsapirest.controllers;
+package com.eduardo.productsapirest.presentation.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 // import com.eduardo.productsapirest.repository.ProductsRepository;
 
-import com.eduardo.productsapirest.entities.Products;
+import com.eduardo.productsapirest.persistence.entities.Products;
 
 @RestController
 @RequestMapping("/v1/products")

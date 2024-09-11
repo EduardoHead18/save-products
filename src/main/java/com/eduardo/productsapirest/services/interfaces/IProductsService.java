@@ -1,12 +1,12 @@
-package com.eduardo.productsapirest.services;
+package com.eduardo.productsapirest.services.interfaces;
 
-import com.eduardo.productsapirest.entities.Products;
+import com.eduardo.productsapirest.persistence.entities.Products;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductsService {
+public interface IProductsService {
     public ResponseEntity<List<Products>> getAllProducts();
     public Optional<Products> getProduct(Long id);
     public ResponseEntity<Products> createProduct(Products products);

@@ -1,7 +1,6 @@
-package com.eduardo.productsapirest.controllers;
+package com.eduardo.productsapirest.presentation.controller;
 
-import com.eduardo.productsapirest.exceptions.ProductsExceptions;
-import com.eduardo.productsapirest.exceptions.dto.ErrorMessage;
+import com.eduardo.productsapirest.services.exception.ProductsExceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

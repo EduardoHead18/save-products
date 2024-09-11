@@ -1,4 +1,4 @@
-package com.eduardo.productsapirest.exceptions.dto;
+package com.eduardo.productsapirest.presentation.dto;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;

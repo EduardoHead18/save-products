@@ -1,12 +1,9 @@
-package com.eduardo.productsapirest.exceptions;
+package com.eduardo.productsapirest.services.exception;
 
-import com.eduardo.productsapirest.exceptions.dto.ErrorMessage;
+import com.eduardo.productsapirest.presentation.dto.ErrorMessage;
 import lombok.*;
 
 import org.springframework.http.HttpStatus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

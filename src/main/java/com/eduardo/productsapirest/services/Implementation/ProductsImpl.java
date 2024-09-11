@@ -1,9 +1,9 @@
 package com.eduardo.productsapirest.services.Implementation;
 
-import com.eduardo.productsapirest.entities.Products;
-import com.eduardo.productsapirest.exceptions.ProductsExceptions;
-import com.eduardo.productsapirest.repository.ProductsRepository;
-import com.eduardo.productsapirest.services.ProductsService;
+import com.eduardo.productsapirest.persistence.entities.Products;
+import com.eduardo.productsapirest.services.exception.ProductsExceptions;
+import com.eduardo.productsapirest.persistence.repository.ProductsRepository;
+import com.eduardo.productsapirest.services.interfaces.IProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ProductsImpl implements ProductsService {
+public class ProductsImpl implements IProductsService {
     @Autowired
     ProductsRepository productsRepository;
 

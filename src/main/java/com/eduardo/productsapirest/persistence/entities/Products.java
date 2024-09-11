@@ -1,4 +1,4 @@
-package com.eduardo.productsapirest.entities;
+package com.eduardo.productsapirest.persistence.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
