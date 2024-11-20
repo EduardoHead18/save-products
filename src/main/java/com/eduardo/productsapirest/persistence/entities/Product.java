@@ -1,4 +1,4 @@
-package com.eduardo.productsapirest.entities;
+package com.eduardo.productsapirest.persistence.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,22 +6,32 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
-@Entity 
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Table(name = "products")
 // @Table(schema = "products")
-public class Products {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 50)
+    @Pattern(regexp = "^[A-Za-z0-9 ]+$", message = "Name can only contain letters, numbers, and spaces")
+    @NotBlank(message ="required name field")
     private String name;
+
     @Column(length = 50)
-    private double price;
+    @NotNull(message="required price field")
+    private Double price;
+
 
 }
