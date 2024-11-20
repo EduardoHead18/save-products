@@ -9,11 +9,11 @@ import org.springframework.http.HttpStatus;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductsExceptions extends RuntimeException {
+public class ProductException extends RuntimeException {
     private HttpStatus status;
     private String message;
 
-    public ProductsExceptions(String message, HttpStatus status) {
+    public ProductException(String message, HttpStatus status) {
 //        super(message);
         this.message = message;
         this.status = status;

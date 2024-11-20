@@ -11,13 +11,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
-@Entity 
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Table(name = "products")
 // @Table(schema = "products")
-public class Products {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +32,6 @@ public class Products {
     @Column(length = 50)
     @NotNull(message="required price field")
     private Double price;
+
+
 }
