@@ -32,6 +32,10 @@ public class Product {
     @Column(length = 50)
     @NotNull(message="required price field")
     private Double price;
+    //new
+    private String productsCode;
+    private Long quantityOfProducts;
+    private String imageUrl;
 
 
 }

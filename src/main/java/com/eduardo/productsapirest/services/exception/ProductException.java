@@ -21,7 +21,6 @@ public class ProductException extends RuntimeException {
     public HttpStatus getStatus() {
         return this.status;
     }
-
     public ErrorMessage getResponse(){
         return new ErrorMessage(this.status, this.message);
     }

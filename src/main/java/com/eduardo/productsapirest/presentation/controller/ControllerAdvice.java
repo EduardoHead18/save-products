@@ -11,9 +11,7 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = ProductException.class)
     public ResponseEntity<Object> productsExceptions(ProductException ex){
-
         //ProductsExceptions productsExceptions = ProductsExceptions.builder().code(ex.getCode)
-
         ProductException productException = new ProductException(ex.getMessage(),ex.getStatus());
         return new ResponseEntity<>(productException.getResponse(), HttpStatus.NOT_FOUND);
 
