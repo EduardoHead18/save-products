@@ -11,6 +11,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,6 +38,6 @@ public class Product {
     private String productsCode;
     private Long quantityOfProducts;
     private String imageUrl;
-
-
+    private LocalDate date;
+    //test git
 }
