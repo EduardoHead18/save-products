@@ -35,9 +35,8 @@ public class Product {
     @NotNull(message="required price field")
     private Double price;
     //new
-    private String productsCode;
+    @NotNull(message="requires quatity of products field")
     private Long quantityOfProducts;
-    private String imageUrl;
+    @NotNull(message="requires the registration date field")
     private LocalDate date;
-    //test git
 }

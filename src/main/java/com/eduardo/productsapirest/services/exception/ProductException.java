@@ -21,6 +21,11 @@ public class ProductException extends RuntimeException {
     public HttpStatus getStatus() {
         return this.status;
     }
+    // Avoiding the "trace" of customer responses
+    @Override
+    public synchronized Throwable fillInStackTrace() {
+        return this; // trace
+    }
     public ErrorMessage getResponse(){
         return new ErrorMessage(this.status, this.message);
     }
