@@ -11,6 +11,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,6 +34,9 @@ public class Product {
     @Column(length = 50)
     @NotNull(message="required price field")
     private Double price;
-
-
+    //new
+    @NotNull(message="requires quatity of products field")
+    private Long quantityOfProducts;
+    @NotNull(message="requires the registration date field")
+    private LocalDate date;
 }
