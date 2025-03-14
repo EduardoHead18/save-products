@@ -27,5 +27,5 @@ jobs:
         with:
           name: product-api-jar
           path: ~/save-products
-      - name: file list
+      - name: file list server
         run: ls -a
