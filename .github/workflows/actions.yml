@@ -21,8 +21,11 @@ jobs:
         with:
           name: product-api-jar
           path: target/products-apirest-0.0.1-SNAPSHOT.jar
+          compression-level: 0
       - name: download artifact
         uses: actions/download-artifact@v4
         with:
           name: product-api-jar
           path: ~/save-products
+      - name: file list
+        run: ls -a
