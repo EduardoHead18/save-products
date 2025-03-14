@@ -16,4 +16,9 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn clean package -DskipTests
+      - name: save jar artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: product-api-jar
+          path: target/products-apirest-0.0.1-SNAPSHOT.jar
 
