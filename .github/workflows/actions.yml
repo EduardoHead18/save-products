@@ -21,11 +21,26 @@ jobs:
         with:
           name: product-api-jar
           path: target/products-apirest-0.0.1-SNAPSHOT.jar
-          compression-level: 0
-      - name: download artifact
-        uses: actions/download-artifact@v4
+
+  ec2-deploy:
+    needs: app-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact to EC2 server
+        uses: appleboy/ssh-action@v0.1.5
         with:
-          name: product-api-jar
-          path: ~/save-products
-      - name: file list server
-        run: ls -a
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: 22
+          scripts: |
+            if [ -d "app" ]; then
+              echo "📌update repo"
+              cd app
+              git reset --hard
+              git pull origin develop
+            else
+              echo "🚀 cloning repo..."
+              git clone --branch develop https://github.com/EduardoHead18/save-products.git app
+
+
