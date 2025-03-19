@@ -29,20 +29,20 @@ jobs:
     needs: app-build
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifact from GitHub Actions
-        uses: actions/download-artifact@v4
-        with:
-          name: product-api-jar
-          path: .
+#      - name: Download artifact from GitHub Actions
+#        uses: actions/download-artifact@v4
+#        with:
+#          name: product-api-jar
+#          path: .
 
-      - name: Transfer artifact to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          source: "products-apirest-0.0.1-SNAPSHOT.jar"
-          target: "/home/${{ secrets.EC2_USER }}/app/"
+#      - name: Transfer artifact to EC2
+#        uses: appleboy/scp-action@v0.1.7
+#        with:
+#          host: ${{ secrets.EC2_HOST }}
+#          username: ${{ secrets.EC2_USER }}
+#          key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          source: "products-apirest-0.0.1-SNAPSHOT.jar"
+#          target: "/home/${{ secrets.EC2_USER }}/app/"
 
       - name: Deploy on EC2
         uses: appleboy/ssh-action@v0.1.7
@@ -52,7 +52,7 @@ jobs:
           key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           script: |
             echo "✅ Deploying API in EC2..."
-            cd /home/${{ secrets.EC2_USER }}/app/
-            chmod +x products-apirest-0.0.1-SNAPSHOT.jar
-            nohup java -jar products-apirest-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
-            echo "🚀 API is running!"
+#            cd /home/${{ secrets.EC2_USER }}/app/
+#            chmod +x products-apirest-0.0.1-SNAPSHOT.jar
+#            nohup java -jar products-apirest-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
+#            echo "🚀 API is running!"
