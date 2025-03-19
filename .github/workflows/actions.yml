@@ -31,7 +31,7 @@ jobs:
     steps:
       - name: run hello
         run: |
-          if [[ -z "${{ secrets.TEST_NAME }}" ]]; then
+          if [[ -z "${{ secrets.TEST_AGAIN }}" ]]; then
           echo "El secreto está vacío"
           else
           echo "El secreto tiene contenido"
