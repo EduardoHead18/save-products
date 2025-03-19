@@ -30,12 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: run hello
-        run: |
-          if [[ -z "${{ secrets.TEST_AGAIN }}" ]]; then
-          echo "El secreto está vacío"
-          else
-          echo "El secreto tiene contenido"
-          fi
+        run: echo "secret:${{ secrets.TEST_AGAIN }}"
+
 #      - name: ssh access to ec2
 #        run: |
 #          sudo ssh -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}
