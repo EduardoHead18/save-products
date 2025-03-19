@@ -48,8 +48,8 @@ jobs:
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
           script: |
             echo "✅ Deploying API in EC2..."
 #            cd /home/${{ secrets.EC2_USER }}/app/
