@@ -29,10 +29,11 @@ jobs:
     needs: app-build
     runs-on: ubuntu-latest
     steps:
-      run: |
-        sudo ssh -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}
-        echo "hello from server"
-        pwd
+      - name: ssh access to ec2
+        run: |
+          sudo ssh -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}
+          echo "hello from server"
+          pwd
 #      - name: Download artifact from GitHub Actions
 #        uses: actions/download-artifact@v4
 #        with:
