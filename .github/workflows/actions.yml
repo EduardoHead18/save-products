@@ -29,11 +29,6 @@ jobs:
     needs: app-build
     runs-on: ubuntu-latest
     steps:
-      - name: ssh access to ec2
-        run: |
-          sudo ssh -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}
-          echo "hello from server"
-          pwd
 
 #      - name: Download artifact from GitHub Actions
 #        uses: actions/download-artifact@v4
@@ -51,15 +46,15 @@ jobs:
 #          target: "/home/${{ secrets.EC2_USER }}/app/"
 
 
-#      - name: Deploy on EC2
-#        uses: appleboy/ssh-action@v0.1.7
-#        with:
-#          host: ${{ secrets.EC2_HOST }}
-#          username: ${{ secrets.EC2_USERNAME }}
-#          key: ${{ secrets.EC2_KEY }}
-#          script: |
-#            echo "✅ Deploying API in EC2..."
-#            cd /home/${{ secrets.EC2_USER }}/app/
-#            chmod +x products-apirest-0.0.1-SNAPSHOT.jar
-#            nohup java -jar products-apirest-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
-#            echo "🚀 API is running!"
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            echo "✅ Deploying API in EC2..."
+            cd /home/${{ secrets.EC2_USER }}/app/
+            chmod +x products-apirest-0.0.1-SNAPSHOT.jar
+            nohup java -jar products-apirest-0.0.1-SNAPSHOT.jar > log.txt 2>&1 &
+            echo "🚀 API is running!"
