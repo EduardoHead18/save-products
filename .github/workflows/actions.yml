@@ -26,13 +26,14 @@ jobs:
     needs: app-build
     runs-on: ubuntu-latest
     steps:
+      - id: deploy
       - name: Download artifact to EC2 server
-        uses: appleboy/ssh-action@v0.1.5
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.1
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
-          port: 22
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_default_region: ${{ secrets.AWS_REGION }}
+          aws_elb_app_port: 8080
           script: |
             if [ -d "app" ]; then
               echo "📌update repo"
