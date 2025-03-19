@@ -26,7 +26,6 @@ jobs:
     needs: app-build
     runs-on: ubuntu-latest
     steps:
-      - id: deploy
       - name: Download artifact to EC2 server
         uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.1
         with:
