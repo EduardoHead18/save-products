@@ -36,16 +36,15 @@ jobs:
           name: product-api-jar
           path: .
 
-      - name: git clone
+      - name: Clone or update repository on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_KEY } ${USER_NAME}@${HOSTNAME} ' << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           if [ -d "/home/${{ secrets.EC2_USER }}/save-products/.git" ]; then
-             cd /home/${{ secrets.EC2_USER }}/save-products && git pull origin develop
+            cd /home/${{ secrets.EC2_USER }}/save-products && git pull origin develop
           else
-             git clone --branch develop https://github.com/EduardoHead18/save-products.git /home/${{ secrets.EC2_USER }}/save-products
+            git clone --branch develop https://github.com/EduardoHead18/save-products.git /home/${{ secrets.EC2_USER }}/save-products
           fi
           EOF
-
 
       - name: Transfer artifact to EC2
         uses: appleboy/scp-action@v0.1.7
