@@ -43,10 +43,12 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+            sudo mkdir -p /home/${{ secrets.EC2_USER }}/save-products
+            sudo chown -R ${{ secrets.EC2_USER }} /home/${{ secrets.EC2_USER }}/save-products
             if [ -d "/home/${{ secrets.EC2_USER }}/save-products/.git" ]; then
-              cd /home/${{ secrets.EC2_USER }}/save-products && git pull origin develop
+            cd /home/${{ secrets.EC2_USER }}/save-products && git pull origin develop
             else
-              git clone --branch develop https://github.com/EduardoHead18/save-products.git /home/${{ secrets.EC2_USER }}/save-products
+            git clone --branch develop https://github.com/EduardoHead18/save-products.git /home/${{ secrets.EC2_USER }}/save-products
             fi
 
       - name: Transfer artifact to EC2
