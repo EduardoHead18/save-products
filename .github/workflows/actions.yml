@@ -61,7 +61,7 @@ jobs:
           source: "products-apirest-0.0.1-SNAPSHOT.jar"
           target: "/home/${{ secrets.EC2_USERNAME }}/save-products/target/"
 
-  ec2-deploy:
+  ec2-download-artifact:
     needs: git-clone
     runs-on: ubuntu-latest
     steps:
@@ -78,7 +78,17 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           source: "products-apirest-0.0.1-SNAPSHOT.jar"
-          target: "/home/${{ secrets.EC2_USER }}/save-products/target/"
-          script: |
-            sudo docker compose up -d
-          
+          target: "/home/${{ secrets.EC2_USERNAME }}/save-products/target/"
+
+  run-docker:
+    needs: ec2-download-artifact
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Docker Compose
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_KEY }}
+        script: |
+          sudo docker compose up -d          
