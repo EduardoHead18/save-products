@@ -16,10 +16,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
+      - name: Build with Maven 🔨
         run: mvn clean package -DskipTests
 
-      - name: save jar artifact
+      - name: upload artifact 🚀
         uses: actions/upload-artifact@v4
         with:
           name: product-api-jar
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Download artifact from GitHub Actions
+      - name: Download artifact from GitHub Actions ✅
         uses: actions/download-artifact@v4
         with:
           name: product-api-jar
@@ -52,15 +52,6 @@ jobs:
               git clone --branch develop https://github.com/EduardoHead18/save-products.git .
             fi
 
-      - name: Transfer artifact to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_KEY }}
-          source: "products-apirest-0.0.1-SNAPSHOT.jar"
-          target: "/home/${{ secrets.EC2_USERNAME }}/save-products/target/"
-
   ec2-download-artifact:
     needs: git-clone
     runs-on: ubuntu-latest
@@ -71,7 +62,7 @@ jobs:
           name: product-api-jar
           path: .
 
-      - name: Transfer artifact to EC2
+      - name: Transfer artifact to EC2 🚀
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -84,7 +75,7 @@ jobs:
     needs: ec2-download-artifact
     runs-on: ubuntu-latest
     steps:
-      - name: Run Docker Compose
+      - name: Run Docker Compose 🚀
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_HOST }}
