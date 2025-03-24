@@ -36,21 +36,21 @@ jobs:
           name: product-api-jar
           path: .
 
-      - name: Clone or update repository on EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          if [ -d "/home/${{ secrets.EC2_USER }}/save-products/.git" ]; then
-            cd /home/${{ secrets.EC2_USER }}/save-products && git pull origin develop
-          else
-            git clone --branch develop https://github.com/EduardoHead18/save-products.git /home/${{ secrets.EC2_USER }}/save-products
-          fi
-          EOF
+      - name: git clone
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          password: ${{ secrets.EC2_KEY }}
+          script: |
+            cd /home/${{ secrets.EC2_USER }}/save-products
+            git clone branch --develop https://github.com/EduardoHead18/save-products.git
 
       - name: Transfer artifact to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
+          username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           source: "products-apirest-0.0.1-SNAPSHOT.jar"
           target: "/home/${{ secrets.EC2_USER }}/save-products/target/"
@@ -69,7 +69,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
+          username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           source: "products-apirest-0.0.1-SNAPSHOT.jar"
           target: "/home/${{ secrets.EC2_USER }}/save-products/target/"
