@@ -4,7 +4,7 @@ on:
     branches:
       - develop
 jobs:
-  app-build:
+  build-jar:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,8 +16,14 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: clean maven cache
+        run: mvn clean
+
       - name: Build with Maven 🔨
         run: mvn clean package -DskipTests
+
+      - name: Inspect JAR contents 🤖
+        run: jar tf target/products-apirest-0.0.1-SNAPSHOT.jar | grep ProductsApirestApplication.class
 
       - name: upload artifact 🚀
         uses: actions/upload-artifact@v4
@@ -26,7 +32,7 @@ jobs:
           path: target/products-apirest-0.0.1-SNAPSHOT.jar
 
   git-clone:
-    needs: app-build
+    needs: build-jar
     runs-on: ubuntu-latest
     steps:
 
@@ -36,13 +42,14 @@ jobs:
           name: product-api-jar
           path: .
 
-      - name: git clone
+      - name: git clone project in EC2 ✅
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+            rm -f /home/${{ secrets.EC2_USERNAME }}/save-products/target/products-apirest-0.0.1-SNAPSHOT.jar
             sudo mkdir -p /home/${{ secrets.EC2_USERNAME }}/save-products
             sudo chown -R $USER:$USER /home/${{ secrets.EC2_USERNAME }}/save-products
             cd /home/${{ secrets.EC2_USERNAME }}/save-products
@@ -84,4 +91,5 @@ jobs:
           script: |
             cd /home/${{ secrets.EC2_USERNAME }}/save-products
             sudo docker compose down
+            sudo docker rmi $(sudo docker images -q) || true
             sudo docker compose up -d          
