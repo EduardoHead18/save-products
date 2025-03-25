@@ -2,7 +2,7 @@
 
 # Aplication with spring boot
 
-- Documentation: http://localhost:8080/swagger-ui/index.html#/
+- Documentation: http://3.142.35.109:8080/:8080/swagger-ui/index.html#/
 
 ## You need  to have installed 
 
