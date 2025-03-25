@@ -1,3 +1,5 @@
+[![app-actions](https://github.com/EduardoHead18/save-products/actions/workflows/actions.yml/badge.svg)](https://github.com/EduardoHead18/save-products/actions/workflows/actions.yml)
+
 # Aplication with spring boot
 
 - Documentation: http://localhost:8080/swagger-ui/index.html#/
