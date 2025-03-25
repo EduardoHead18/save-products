@@ -2,7 +2,7 @@ name: app-actions
 on:
   push:
     branches:
-      - develop
+      - main
 jobs:
   build-jar:
     runs-on: ubuntu-latest
