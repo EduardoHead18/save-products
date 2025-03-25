@@ -1,4 +1,4 @@
-[![app-actions](https://github.com/EduardoHead18/save-products/actions/workflows/actions.yml/badge.svg)](https://github.com/EduardoHead18/save-products/actions/workflows/actions.yml)
+[![app-actions](https://github.com/EduardoHead18/save-products/actions/workflows/pipeline.yml/badge.svg)](https://github.com/EduardoHead18/save-products/actions/workflows/pipeline.yml)
 
 # Aplication with spring boot
 
