@@ -1,7 +1,8 @@
 [![app-actions](https://github.com/EduardoHead18/save-products/actions/workflows/pipeline.yml/badge.svg)](https://github.com/EduardoHead18/save-products/actions/workflows/pipeline.yml)
 
 # Aplication with spring boot
-![spring-api](https://github.com/user-attachments/assets/a253baa3-04a9-48c6-84c3-b0b0c1e2c834)
+![spring-api](https://github.com/user-attachments/assets/7ed39153-9b98-493a-9b1b-166b361c3e35)
+
 
 - Documentation: http://localhost:8080/swagger-ui/index.html#/
 
